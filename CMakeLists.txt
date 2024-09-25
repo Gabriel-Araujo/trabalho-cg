@@ -4,7 +4,11 @@ project(trabalhocg)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(trabalhocg main.cpp)
+add_executable(trabalhocg main.cpp
+        utils/gridplane.h
+        utils/constants.h
+        utils/keyboard.h
+        utils/camera.h)
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
