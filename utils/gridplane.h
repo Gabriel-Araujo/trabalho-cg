@@ -50,10 +50,10 @@ inline void display_grid_plane() {
 
     // Retângulo centralizado no ponto (0, 0, 0) e paralelo ao plano XY
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-40.0, -40.0, 0.0);  // Vértice inferior esquerdo
-    glTexCoord2f(0.0, 1.0); glVertex3f(-40.0, 40.0, 0.0);   // Vértice superior esquerdo
-    glTexCoord2f(1.0, 1.0); glVertex3f(40.0, 40.0, 0.0);    // Vértice superior direito
-    glTexCoord2f(1.0, 0.0); glVertex3f(40.0, -40.0, 0.0);   // Vértice inferior direito
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100.0, -100.0, 0.0);  // Vértice inferior esquerdo
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100.0, 100.0, 0.0);   // Vértice superior esquerdo
+    glTexCoord2f(1.0, 1.0); glVertex3f(100.0, 100.0, 0.0);    // Vértice superior direito
+    glTexCoord2f(1.0, 0.0); glVertex3f(100.0, -100.0, 0.0);   // Vértice inferior direito
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
