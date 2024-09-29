@@ -22,10 +22,11 @@ Para compilar esse programa é necessário os pacotes:
 
 Que foram instaladas usando os comandos:
 
-    sudo apt install freeglut3-dev
-    sudo apt install mesa-utils
-    sudo apt install libxmu-dev libxi-dev
-
+    sudo apt install freeglut3-dev && \
+    sudo apt install mesa-utils && \
+    sudo apt install libxmu-dev libxi-dev && \
+    sudo apt-get install libglm-dev && \
+    sudo apt install cmake
 # Utilidades
 
 Foi utilizado o _cmake_ (v. min. 3.22) como software de build, e o _wsl_ (ubuntu) para compilar
@@ -34,4 +35,10 @@ o código para o linux.
 # Teste
 Execute o comando seguinte comando para verificar se está tudo configurado:
     
-    g++ hello.c -o hello -lGL -lGLU -lglut
+    mkdir build && cd build && cmake .. && make && ./trabalhocg
+
+
+# Referencias
+
+- [OpenGL](https://www.opengl.org/)
+- [SkyBox / CubeMap](https://www.youtube.com/watch?v=8sVvxeKI9Pk)
