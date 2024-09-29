@@ -4,8 +4,8 @@
 
 #ifndef GRIDPLANE_H
 #define GRIDPLANE_H
-#include <GL/gl.h>
 
+#include "common.h"
 #include "constants.h"
 
 inline void makeCheckImages() {
@@ -43,17 +43,16 @@ inline void display_grid_plane() {
     glBindTexture(GL_TEXTURE_2D, texName);
 
     if (!GRID_PLANE) {
-        glColor4f(plane_color[0],plane_color[1],plane_color[2],plane_color[3]);
+        glColor4f(plane_color[0], plane_color[1], plane_color[2], plane_color[3]);
         glDisable(GL_TEXTURE_2D);
     }
 
-
-    // Retângulo centralizado no ponto (0, 0, 0) e paralelo ao plano XY
+    // Retângulo centralizado no ponto (0, 0, 0) e paralelo ao plano XZ
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-100.0, -100.0, 0.0);  // Vértice inferior esquerdo
-    glTexCoord2f(0.0, 1.0); glVertex3f(-100.0, 100.0, 0.0);   // Vértice superior esquerdo
-    glTexCoord2f(1.0, 1.0); glVertex3f(100.0, 100.0, 0.0);    // Vértice superior direito
-    glTexCoord2f(1.0, 0.0); glVertex3f(100.0, -100.0, 0.0);   // Vértice inferior direito
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100.0, 0.0, -100.0);  // Vértice inferior esquerdo
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100.0, 0.0, 100.0);   // Vértice superior esquerdo
+    glTexCoord2f(1.0, 1.0); glVertex3f(100.0, 0.0, 100.0);    // Vértice superior direito
+    glTexCoord2f(1.0, 0.0); glVertex3f(100.0, 0.0, -100.0);   // Vértice inferior direito
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
