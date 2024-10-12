@@ -10,3 +10,9 @@
 cmake-build-debug/
 .idea/
 **/build/**
+
+# Modelos e seus artefatos
+*.obj
+*.mtl
+*.png
+*.jpg
