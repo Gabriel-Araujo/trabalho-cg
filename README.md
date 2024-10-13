@@ -18,7 +18,8 @@ Para compilar esse programa é necessário os pacotes:
 - OpenGL Utility Toolkit (GLUT);
 - Miscellaneous Mesa GL;
 - X11 miscellaneous utility library;
-- X11 Input extension library.
+- X11 Input extension library;
+- glew.
 
 Que foram instaladas usando os comandos:
 
@@ -27,6 +28,14 @@ Que foram instaladas usando os comandos:
     sudo apt install libxmu-dev libxi-dev && \
     sudo apt-get install libglm-dev && \
     sudo apt install cmake
+
+    git clone https://github.com/nigels-com/glew.git glew
+    cd glew/auto
+    make
+    cd ..
+    sudo make install
+    make clean
+
 # Utilidades
 
 Foi utilizado o _cmake_ (v. min. 3.22) como software de build, e o _wsl_ (ubuntu) para compilar

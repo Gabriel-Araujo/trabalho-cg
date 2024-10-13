@@ -1,7 +1,10 @@
+#ifndef ESPHERE_H
+#define ESPHERE_H
 
+#include <GL/glew.h>
 #include "common.h"
 
-void display_esphere() {
+inline void display_esphere() {
    // Salva a matriz de transformação atual
     glPushMatrix();
 
@@ -19,3 +22,5 @@ void display_esphere() {
    // Restaura a matriz de transformação
    glPopMatrix();
 }
+
+#endif //ESPHERE_H

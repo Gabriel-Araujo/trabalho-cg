@@ -1,24 +1,27 @@
 
-#include "common.h"
 #ifndef INPUT_MANAGER_H
 #define INPUT_MANAGER_H
+#include "common.h"
 
 
 // Variáveis para armazenar o ângulo de pitch e yaw
-float pitch = 0.0f;
-float yaw = -90.0f;  // Inicialmente olhando para o eixo Z negativo
+inline float pitch = 0.0f;
+inline float yaw = -90.0f;  // Inicialmente olhando para o eixo Z negativo
 
 // Variáveis para armazenar a posição anterior do mouse
-int lastMouseX, lastMouseY;
-bool firstMouse = true;
+inline int lastMouseX, lastMouseY;
+inline bool firstMouse = true;
 
 // Posição da câmera
-glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 3.0f);  // Altura inicial de 1.0f para estar acima do plano
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+inline auto cameraPos = glm::vec3(0.0f, 2.0f, 3.0f);  // Altura inicial de 1.0f para estar acima do plano
+inline auto cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+inline auto cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+// Velocidade na qual a câmera se move.
+constexpr float cameraSpeed = 0.1f;
 
 // Função para atualizar a câmera
-void updateCamera() {
+inline void updateCamera() {
     glm::mat4 view = glm::lookAt(
         cameraPos,
         cameraPos + cameraFront,
@@ -31,8 +34,8 @@ void updateCamera() {
 }
 
 // Função de callback para teclas normais (W, A, S, D)
-void keyboard(unsigned char key, int x, int y) {
-    const float cameraSpeed = 0.05f;
+inline void keyboard(const unsigned char key, int x, int y) {
+
 
     switch (key) {
         case 'w':
@@ -42,10 +45,10 @@ void keyboard(unsigned char key, int x, int y) {
             cameraPos -= cameraSpeed * cameraFront;
             break;
         case 'a':
-            cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+            cameraPos -= normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
             break;
         case 'd':
-            cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+            cameraPos += normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
             break;
 
         // TAB
@@ -60,6 +63,7 @@ void keyboard(unsigned char key, int x, int y) {
         default:
             break;
     }
+    cameraPos[1] = 2.0;
 
     // Atualizar a câmera após a mudança de posição
     updateCamera();
@@ -69,20 +73,20 @@ void keyboard(unsigned char key, int x, int y) {
 }
 
 // Função de callback para movimento do mouse
-void mouseMotion(int x, int y) {
+inline void mouseMotion(const int x, const int y) {
     if (firstMouse) {
         lastMouseX = x;
         lastMouseY = y;
         firstMouse = false;
     }
 
-    int deltaX = x - lastMouseX;
-    int deltaY = y - lastMouseY;
+    const int deltaX = x - lastMouseX;
+    const int deltaY = y - lastMouseY;
 
     lastMouseX = x;
     lastMouseY = y;
 
-    const float sensitivity = 0.1f;
+    constexpr float sensitivity = 0.1f;
     yaw += deltaX * sensitivity;
     pitch -= deltaY * sensitivity;
 

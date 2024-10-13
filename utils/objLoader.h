@@ -1,3 +1,6 @@
+#ifndef CUSTOM_LOADED_OBJECT_H
+#define CUSTOM_LOADED_OBJECT_H
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -18,7 +21,7 @@ struct CustomLoadedObject {
 };
 
 
-CustomLoadedObject loadOBJ(const std::string& pathToObj, const std::string& pathToTexture) {
+inline CustomLoadedObject loadOBJ(const std::string& pathToObj, const std::string& pathToTexture) {
     CustomLoadedObject obj;
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
@@ -71,7 +74,7 @@ CustomLoadedObject loadOBJ(const std::string& pathToObj, const std::string& path
     return obj;
 }
 
-void copyTexture(GLuint sourceTextureID, GLuint& destTextureID) {
+inline void copyTexture(GLuint sourceTextureID, GLuint& destTextureID) {
     glGenTextures(1, &destTextureID);
     glBindTexture(GL_TEXTURE_2D, sourceTextureID);
 
@@ -91,7 +94,7 @@ void copyTexture(GLuint sourceTextureID, GLuint& destTextureID) {
     delete[] data;
 }
 
-CustomLoadedObject copyObject(const CustomLoadedObject& source) {
+inline CustomLoadedObject copyObject(const CustomLoadedObject& source) {
     CustomLoadedObject copy;
     copy.vertices = source.vertices;
     copy.uvs = source.uvs;
@@ -101,7 +104,7 @@ CustomLoadedObject copyObject(const CustomLoadedObject& source) {
 }
 
 // recebe o objeto e a posição do objeto
-void displayObject(const CustomLoadedObject& obj, const glm::vec3& position) {
+inline void displayObject(const CustomLoadedObject& obj, const glm::vec3& position) {
     glPushMatrix();
     glTranslatef(position.x, position.y, position.z);
 
@@ -118,3 +121,5 @@ void displayObject(const CustomLoadedObject& obj, const glm::vec3& position) {
 
     glPopMatrix();
 }
+
+#endif //CUSTOM_LOADED_OBJECT_H
