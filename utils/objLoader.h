@@ -102,6 +102,7 @@ CustomLoadedObject copyObject(const CustomLoadedObject& source) {
 
 // recebe o objeto e a posição do objeto
 void displayObject(const CustomLoadedObject& obj, const glm::vec3& position) {
+    
     glPushMatrix();
     glTranslatef(position.x, position.y, position.z);
 

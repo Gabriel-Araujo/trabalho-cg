@@ -6,14 +6,14 @@
 
 // Variáveis para armazenar o ângulo de pitch e yaw
 float pitch = 0.0f;
-float yaw = -90.0f;  // Inicialmente olhando para o eixo Z negativo
+float yaw = 90.0f;  // Inicialmente olhando para o eixo Z negativo
 
 // Variáveis para armazenar a posição anterior do mouse
 int lastMouseX, lastMouseY;
 bool firstMouse = true;
 
 // Posição da câmera
-glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 3.0f);  // Altura inicial de 1.0f para estar acima do plano
+glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 0.0f);  // Altura inicial de 1.0f para estar acima do plano
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -30,7 +30,6 @@ void updateCamera() {
     glLoadMatrixf(glm::value_ptr(view));
 }
 
-// Função de callback para teclas normais (W, A, S, D)
 void keyboard(unsigned char key, int x, int y) {
     const float cameraSpeed = 0.05f;
 
@@ -47,6 +46,9 @@ void keyboard(unsigned char key, int x, int y) {
         case 'd':
             cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
             break;
+        
+        // Atualiza a posição do carro conforme a câmera se move
+        cameraPos += cameraSpeed * cameraFront;
 
         // TAB
         case 9:
