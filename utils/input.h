@@ -18,7 +18,7 @@ inline auto cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 inline auto cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 // Velocidade na qual a câmera se move.
-constexpr float cameraSpeed = 0.1f;
+constexpr float cameraSpeed = 0.5f;
 
 // Função para atualizar a câmera
 inline void updateCamera() {
