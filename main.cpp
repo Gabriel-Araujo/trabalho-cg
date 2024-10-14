@@ -9,7 +9,7 @@
 #include "utils/objLoader.h"
 
 std::vector<CustomLoadedObject> objects;
-
+auto globalCarPosition = glm::vec3(0, -3.7f, 10.0f);
 void init() {
     glClearColor(0.296875, 0.59375, 0.953125, 0.96);
     glEnable(GL_DEPTH_TEST);
@@ -55,7 +55,7 @@ void render() {
     display_grid_plane();
 
     // Atualizando a posição do carro de acordo com a posição da câmera
-    auto carPosition = cameraPos + glm::vec3(-2.3f, -1.7f, 10.0f) + cameraFront;
+    auto carPosition = cameraPos + globalCarPosition + cameraFront;
 
     // Calcular a rotação do carro
     float angle = atan2(cameraFront.x, cameraFront.z) * 180.0f / M_PI;

@@ -14,7 +14,7 @@ inline int lastMouseX, lastMouseY;
 inline bool firstMouse = true;
 
 // Posição da câmera
-inline auto cameraPos = glm::vec3(0.0f, 1.0f, 0.0f);  // Altura inicial de 1.0f para estar acima do plano
+inline auto cameraPos = glm::vec3(0.0f, 4.0f, 0.0f);  // Altura inicial de 1.0f para estar acima do plano
 inline auto cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 inline auto cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -66,7 +66,7 @@ inline void keyboard(const unsigned char key, int x, int y) {
         default:
             break;
     }
-    cameraPos[1] = 2.0;
+    cameraPos[1] = 4;
 
     // Atualizar a câmera após a mudança de posição
     updateCamera();
