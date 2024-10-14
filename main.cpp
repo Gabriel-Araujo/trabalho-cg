@@ -1,3 +1,4 @@
+// main.cpp
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include "utils/common.h"
@@ -14,6 +15,7 @@ void init() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+
 
     CustomLoadedObject car = loadObj(
         "../models/car/mercedes/car.obj",
@@ -36,8 +38,6 @@ void init() {
     objects.push_back(house5);
     objects.push_back(house6);
     objects.push_back(a);
-
-
     init_grid_plane();
 }
 
@@ -49,15 +49,35 @@ void reshape(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
 }
 
-
-
-void display() {
+void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
     display_grid_plane();
-    auto carPosition = cameraPos + glm::vec3(-2.3f, -1.7f, 4.0f);
 
-    // Carro
-    displayObject(objects[0], carPosition);
+    // Atualizando a posição do carro de acordo com a posição da câmera
+    auto carPosition = cameraPos + glm::vec3(-2.3f, -1.7f, 10.0f) + cameraFront;
+
+    // Calcular a rotação do carro
+    float angle = atan2(cameraFront.x, cameraFront.z) * 180.0f / M_PI;
+
+    // Salvar o estado atual da matriz
+    glPushMatrix();
+    
+    // Transladar para a posição do carro
+    glTranslatef(carPosition.x, carPosition.y, carPosition.z);
+    
+    // Rotacionar o carro
+    glRotatef(angle, 0.0f, 1.0f, 0.0f);
+
+    // Desenhar o carro
+    displayObject(objects[0], glm::vec3(0.0f, 0.0f, 0.0f)); // o carro é desenhado na origem local
+    
+    // Restaurar a matriz
+    glPopMatrix();
+    
+
+//     // Carro
+//     displayObject(objects[0], carPosition);
 
     // Casas
     displayObject(objects[1], glm::vec3(0,0,0));
@@ -69,29 +89,25 @@ void display() {
     displayObject(objects[7], glm::vec3(0,0,0));
 
     // Chão
-
-
     glutSwapBuffers();
 }
-
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(900, 900);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Our cool project!");
-    glutFullScreen(); 
+    glutFullScreen();
 
     glewInit();
     init();
 
-    glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
+    glutDisplayFunc(render);
     glutPassiveMotionFunc(mouseMotion);
 
     updateCamera();
-   
     glutMainLoop();
     return 0;
 }

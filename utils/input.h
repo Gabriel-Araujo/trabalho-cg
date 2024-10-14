@@ -6,14 +6,15 @@
 
 // Variáveis para armazenar o ângulo de pitch e yaw
 inline float pitch = 0.0f;
-inline float yaw = -90.0f;  // Inicialmente olhando para o eixo Z negativo
+inline float yaw = 90.0f;  // Inicialmente olhando para o eixo Z negativo
+
 
 // Variáveis para armazenar a posição anterior do mouse
 inline int lastMouseX, lastMouseY;
 inline bool firstMouse = true;
 
 // Posição da câmera
-inline auto cameraPos = glm::vec3(0.0f, 2.0f, 3.0f);  // Altura inicial de 1.0f para estar acima do plano
+inline auto cameraPos = glm::vec3(0.0f, 1.0f, 0.0f);  // Altura inicial de 1.0f para estar acima do plano
 inline auto cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 inline auto cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -36,7 +37,6 @@ inline void updateCamera() {
 // Função de callback para teclas normais (W, A, S, D)
 inline void keyboard(const unsigned char key, int x, int y) {
 
-
     switch (key) {
         case 'w':
             cameraPos += cameraSpeed * cameraFront;
@@ -50,6 +50,9 @@ inline void keyboard(const unsigned char key, int x, int y) {
         case 'd':
             cameraPos += normalize(cross(cameraFront, cameraUp)) * cameraSpeed;
             break;
+        
+        // Atualiza a posição do carro conforme a câmera se move
+        cameraPos += cameraSpeed * cameraFront;
 
         // TAB
         case 9:
